@@ -6,22 +6,26 @@ The tests are organized into **Happy Path** (valid scenarios) and **Negative Cas
 ---
 
 ## 📂 Project Structure
-
+```plaintext
 api-testing-postman/
 │── collections/
-│ ├── happy-path-collection.json
-│ ├── negative-cases-collection.json
+│   ├── happy-path-collection.json
+│   ├── negative-cases-collection.json
 │── README.md
-
+```
 - **happy-path-collection.json** → CRUD operations for `Users`, `Comments`, and `Photos`.
 - **negative-cases-collection.json** → Invalid requests to verify error handling (e.g., 404 Not Found, 400 Bad Request).
 
 ---
-
 ## 🚀 How to Use
 
-1. Clone this repository:
+1. Clone this repository:  
    ```bash
    git clone https://github.com/<your-username>/api-testing-postman.git
    cd api-testing-postman
-   ```
+   ```   
+
+2. Open **Postman**.  
+3. Go to **Collections > Import**.  
+4. Select one of the `.json` files from the `collections/` folder.  
+5. Run the requests and check the test results in Postman.  
