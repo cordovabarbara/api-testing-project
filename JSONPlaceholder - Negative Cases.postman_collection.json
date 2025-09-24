@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "a97eff71-f693-44ce-8acf-3a73cd4e91c5",
+		"name": "JSONPlaceholder - Negative Cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27736498"
+	},
+	"item": [
+		{
+			"name": "Users - Error Cases",
+			"item": [
+				{
+					"name": "GET - Non-existent User (404)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 for non-existent user\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/100",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 for invalid endpoint\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/userz\n",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"userz\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Invalid User Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 for invalid user data\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"// Note: In a real API, this test should return 400 Bad Request."
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"not-an-email\",\r\n    \"username\": 123\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments - Error Cases",
+			"item": [
+				{
+					"name": "GET - nonexistent comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 for non-existent comment\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(404);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"GET Nonexistent Comment - Response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"// Note: In a real API, this test should return 404 Not Found."
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/comments/{{comment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"comments",
+								"{{comment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE non-existent comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"DELETE Nonexistent Comment - Status code is 404 or 500\", function () {\r",
+									"    const statusCode = pm.response.code;\r",
+									"    \r",
+									"    pm.expect([404, 500]).to.include(statusCode);\r",
+									"    console.log(`Status code for DELETE nonexistent comment: ${statusCode}`);\r",
+									"});\r",
+									"\r",
+									"// Note: In a real API, this test should return 404 Not Foundd"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/comments/{{comment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"comments",
+								"{{comment_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Photos - Error Cases",
+			"item": [
+				{
+					"name": "Get - Nonexistent Photo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 - Not Found\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has correct status text\", function () {\r",
+									"    pm.expect(pm.response.status).to.eql(\"Not Found\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/photos/{{invalid_photo_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"photos",
+								"{{invalid_photo_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
